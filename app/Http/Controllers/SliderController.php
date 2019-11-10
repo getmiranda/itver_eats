@@ -1,11 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Slider;
+use Illuminate\Http\Request;
 
 class SliderController extends Controller
 {
@@ -16,8 +14,7 @@ class SliderController extends Controller
      */
     public function index()
     {
-        $sliders = Slider::all();
-        return view('admin.slider.index', compact('sliders'));
+        //
     }
 
     /**
@@ -27,7 +24,7 @@ class SliderController extends Controller
      */
     public function create()
     {
-        return view('admin.slider.create');
+        //
     }
 
     /**
@@ -67,10 +64,10 @@ class SliderController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Slider  $slider
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Slider $slider)
     {
         //
     }
@@ -78,64 +75,34 @@ class SliderController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Slider  $slider
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Slider $slider)
     {
-        $slider = Slider::findOrFail($id);
-        return view('admin.slider.edit', compact('slider'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Slider  $slider
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Slider $slider)
     {
-        $this->validate($request,[
-            'title' => 'required',
-            'sub_title' => 'required',
-            'image' => 'mimes:jpeg,jpg,bmp,png',
-        ]);
-        $image = $request->file('image');
-        $slug = str_slug($request->title);
-        $slider = Slider::findOrFail($id);
-        if (isset($image))
-        {
-            $currentDate = Carbon::now()->toDateString();
-            $imagename = $slug .'-'. $currentDate .'-'. uniqid() .'.'. $image->getClientOriginalExtension();
-            if (!file_exists('uploads/slider'))
-            {
-                mkdir('uploads/slider', 0777 , true);
-            }
-            $image->move('uploads/slider',$imagename);
-        }else {
-            $imagename = $slider->image;
-        }
-        $slider->title = $request->title;
-        $slider->sub_title = $request->sub_title;
-        $slider->image = $imagename;
-        $slider->save();
-        return redirect()->route('slider.index')->with('successMsg','Slider successfully updated');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Slider  $slider
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Slider $slider)
     {
-        $slider = Slider::findOrFail($id);
-        if (file_exists('uploads/slider/'.$slider->image)){
-            unlink('uploads/slider/'.$slider->image);
-        }
-        $slider->delete();
-        return redirect()->back()->with('successMsg','Slider successfully deleted');
+        //
     }
 }
