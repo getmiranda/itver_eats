@@ -13,7 +13,9 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
+                    @can('roles.indexx')
+                        <a href="{{ route('home') }}">Roles</a>
+                    @endcan
                     You are logged in!
                 </div>
             </div>
