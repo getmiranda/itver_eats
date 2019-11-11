@@ -31,7 +31,8 @@ Route::group(['prefix'=>'admin','middleware'=>'auth','namespace'=>'admin'], func
     Route::get('dashboard', 'DashboardController@index')->name('admin.dashboard');
     Route::resource('slider','SliderController');
     Route::resource('category','CategoryController');
-    Route::resource('item','ItemController');
+    Route::resource('product','ProductController');
+    Route::post('product/{id}','ProductController@check')->name('product.check');
     Route::get('reservation','ReservationController@index')->name('reservation.index');
     Route::post('reservation/{id}','ReservationController@status')->name('reservation.status');
     Route::delete('reservation/{id}','ReservationController@destory')->name('reservation.destory');

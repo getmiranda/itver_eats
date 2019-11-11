@@ -51,7 +51,7 @@
                         </div>
                         <div class="card-content">
                             <p class="category">Reservation</p>
-                            {{-- <h3 class="title">{{ $reservations->count() }}</h3> --}}
+                            {{-- <h3 class="title">{{ $products->count() }}</h3> --}}
                         </div>
                         <div class="card-footer">
                             <div class="stats">
@@ -82,56 +82,69 @@
                     @include('layouts.partial.msg')
                     <div class="card">
                         <div class="card-header" data-background-color="purple">
-                            <h4 class="title">Reservations</h4>
+                            <h4 class="title">Productos Pendientes</h4>
                         </div>
                         <div class="card-content table-responsive">
                             <table id="table" class="table"  cellspacing="0" width="100%">
                                 <thead class="text-primary">
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Phone</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Image</th>
+                                        <th>Category Name</th>
+                                        <th>User Name</th>
+                                        <th>Description</th>
+                                        <th>Details</th>
+                                        <th>Price</th>
+                                        <th>Status</th>
+                                        <th>Created At</th>
+                                        <th>Action</th>
                                 </thead>
                                 <tbody>
-                                {{-- @foreach($reservations as $key=>$reservation)
-                                    <tr>
-                                        <td>{{ $key + 1 }}</td>
-                                        <td>{{ $reservation->name }}</td>
-                                        <td>{{ $reservation->phone }}</td>
-                                        <th>
-                                            @if($reservation->status == true)
-                                                <span class="label label-info">Confirmed</span>
-                                            @else
-                                                <span class="label label-danger">not Confirmed yet</span>
-                                            @endif
-
-                                        </th>
-                                        <td>
-                                            @if($reservation->status == false)
-                                                <form id="status-form-{{ $reservation->id }}" action="{{ route('reservation.status',$reservation->id) }}" style="display: none;" method="POST">
-                                                    @csrf
-                                                </form>
-                                                <button type="button" class="btn btn-info btn-sm" onclick="if(confirm('Are you verify this request by phone?')){
-                                                        event.preventDefault();
-                                                        document.getElementById('status-form-{{ $reservation->id }}').submit();
-                                                        }else {
-                                                        event.preventDefault();
-                                                        }"><i class="material-icons">done</i></button>
-                                            @endif
-                                            <form id="delete-form-{{ $reservation->id }}" action="{{ route('reservation.destory',$reservation->id) }}" style="display: none;" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                            </form>
-                                            <button type="button" class="btn btn-danger btn-sm" onclick="if(confirm('Are you sure? You want to delete this?')){
-                                                    event.preventDefault();
-                                                    document.getElementById('delete-form-{{ $reservation->id }}').submit();
-                                                    }else {
-                                                    event.preventDefault();
-                                                    }"><i class="material-icons">delete</i></button>
-                                        </td>
-                                    </tr>
-                                @endforeach --}}
+                                    @foreach ($products as $key=>$product)
+                                        @if ($product->check == false)
+                                            <tr>
+                                                <td>{{ $key + 1 }}</td>
+                                                <td>{{ $product->name }}</td>
+                                                <td><img class="img-responsive img-thumbnail" src="{{ asset('uploads/product/'.$product->image) }}" style="height: 100px; width: 100px" alt=""></td>
+                                                <td>{{ $product->category->name }}</td>
+                                                <td>{{ $product->user->nickname }}</td>
+                                                <td>{{ $product->description }}</td>
+                                                <td>{{ $product->details }}</td>
+                                                <td>{{ $product->price }}</td>
+                                                <td>
+                                                    @if($product->check == true)
+                                                        <span class="label label-info">Confirmed</span>
+                                                    @else
+                                                        <span class="label label-danger">not Confirmed yet</span>
+                                                    @endif
+                                                </td>
+                                                <td>{{ $product->created_at }}</td>
+                                                <td>
+                                                    @if($product->check == false)
+                                                        <form id="status-form-{{ $product->id }}" action="{{ route('product.check',$product->id) }}" style="display: none;" method="POST">
+                                                            @csrf
+                                                        </form>
+                                                        <button type="button" class="btn btn-info btn-sm" onclick="if(confirm('Are you verify this request by phone?')){
+                                                                event.preventDefault();
+                                                                document.getElementById('status-form-{{ $product->id }}').submit();
+                                                                }else {
+                                                                event.preventDefault();
+                                                                }"><i class="material-icons">done</i></button>
+                                                    @endif
+                                                    <form id="delete-form-{{ $product->id }}" action="{{ route('product.destroy',$product->id) }}" style="display: none;" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                    </form>
+                                                    <button type="button" class="btn btn-danger btn-sm" onclick="if(confirm('Are you sure? You want to delete this?')){
+                                                            event.preventDefault();
+                                                            document.getElementById('delete-form-{{ $product->id }}').submit();
+                                                            }else {
+                                                            event.preventDefault();
+                                                            }"><i class="material-icons">delete</i></button>
+                                                </td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

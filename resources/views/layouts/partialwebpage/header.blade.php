@@ -19,26 +19,31 @@
             <div class="pull-right">
                 <ul class="header-btns">
                     <!-- Account -->
-                    <li class="header-account dropdown default-dropdown">
-                        <div class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true">
-                            <div class="header-btns-icon">
-                                <i class="fa fa-user-o"></i>
-                            </div>
-                            <strong class="text-uppercase">My Account <i class="fa fa-caret-down"></i></strong>
-                        </div>
-                        <a href="#" class="text-uppercase">Login</a> / <a href="#" class="text-uppercase">Join</a>
-                        <ul class="custom-menu">
-                            <li><a href="#"><i class="fa fa-user-o"></i> My Profile</a></li>
-                            <li><a href="#"><i class="fa fa-heart-o"></i> My Products</a></li>
-                            <li><a href="#"><i class="fa fa-exchange"></i> Compare</a></li>
-                            <li><a href="#"><i class="fa fa-check"></i> Checkout</a></li>
-                            <li><a href="#"><i class="fa fa-unlock-alt"></i> Login</a></li>
-                            <li><a href="#"><i class="fa fa-user-plus"></i> Create An Account</a></li>
-                        </ul>
-                    </li>
+                    @if (Route::has('login'))
+                        <li class="header-account dropdown default-dropdown">
+                            @auth
+                                <div class="dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="true">
+                                    <div class="header-btns-icon">
+                                        <i class="fa fa-user-o"></i>
+                                    </div>
+                                    <strong class="text-uppercase">My Account <i class="fa fa-caret-down"></i></strong>
+                                </div>
+                                <ul class="custom-menu">
+                                    <li><a href=""><i class="fa fa-user-o"></i> My Profile</a></li>
+                                    <li><a href="{{ route('product.index') }}"><i class="fa fa-heart-o"></i> My Products</a></li>
+                                    <li><a href="{{ route('admin.dashboard') }}"><i class="fa fa-exchange"></i> Dashboard</a></li>
+                                    <li><a href="{{ route('logout') }}"><i class="fa fa-unlock-alt"></i>Log Out</a></li>
+                                </ul>
+                            @else
+                                <a href="{{ route('login') }}" class="text-uppercase">Login</a>
+
+                                @if (Route::has('register'))
+                                    / <a href="{{ route('register') }}" class="text-uppercase">Register</a>
+                                @endif
+                            @endauth
+                        </li>
+                    @endif
                     <!-- /Account -->
-
-
 
                     <!-- Mobile nav toggle-->
                     <li class="nav-toggle">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Product;
 
 class DashboardController extends Controller
 {
@@ -15,7 +16,8 @@ class DashboardController extends Controller
     public function index()
     {
         //Retornar la vista del dasboard
-        return view('admin.dashboard');
+        $products = Product::all();
+        return view('admin.dashboard', compact('products'));
     }
 
     /**

@@ -56,8 +56,9 @@
 <div class="section">
     <!-- container -->
     <div class="container">
+
         <!-- row -->
-        <div id="BEBIDAS" class="row">
+        <div id="bebidas" class="row">
             <!-- section-title -->
             <div class="col-md-12">
                 <div class="section-title">
@@ -69,7 +70,7 @@
             </div>
             <!-- /section-title -->
 
-            <!-- banner -->
+            <!-- banner IMAGE -->
             <div class="col-md-3 col-sm-6 col-xs-6">
                 <div class="banner banner-2">
                     <img src="./img/banner14.jpg" alt="">
@@ -81,7 +82,7 @@
             </div>
             <!-- /banner -->
 
-            <!-- Product Slick -->
+            <!-- Product Slick (Productos de esa categoria) -->
             <div class="col-md-9 col-sm-6 col-xs-6">
                 <div class="row">
                     <div id="product-slick-1" class="product-slick">
@@ -223,6 +224,7 @@
                 </div>
             </div>
             <!-- /Product Slick -->
+
         </div>
         <!-- /row -->
     </div>

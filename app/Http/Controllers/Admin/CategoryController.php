@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Category;
 
 class CategoryController extends Controller
 {
@@ -14,7 +16,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+        return view('admin.category.index',compact('categories'));
     }
 
     /**
@@ -24,7 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.category.create');
     }
 
     /**
@@ -35,7 +38,29 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'name' => 'required',
+            'image' => 'required|mimes:jpeg,jpg,bmp,png',
+        ]);
+        $image = $request->file('image');
+        $slug = str_slug($request->name);
+        if (isset($image))
+        {
+            $currentDate = Carbon::now()->toDateString();
+            $imagename = $slug .'-'. $currentDate .'-'. uniqid() .'.'. $image->getClientOriginalExtension();
+            if (!file_exists('uploads/category')){
+                mkdir('uploads/category', 0777 , true);
+            }
+            $image->move('uploads/category',$imagename);
+        }else {
+            $imagename = 'dafault.png';
+        }
+        $category = new Category();
+        $category->name = $request->name;
+        $category->slug = str_slug($request->name);
+        $category->image = $imagename;
+        $category->save();
+        return redirect()->route('category.index')->with('successMsg','Category successfully saved.');
     }
 
     /**
@@ -57,7 +82,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        return view('admin.category.edit',compact('category'));
     }
 
     /**
@@ -69,7 +95,30 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'name'=>'required',
+            'image' => 'mimes:jpeg,jpg,bmp,png',
+        ]);
+        $image = $request->file('image');
+        $slug = str_slug($request->name);
+        $category = Category::findOrFail($id);
+        if (isset($image))
+        {
+            $currentDate = Carbon::now()->toDateString();
+            $imagename = $slug .'-'. $currentDate .'-'. uniqid() .'.'. $image->getClientOriginalExtension();
+            if (!file_exists('uploads/category'))
+            {
+                mkdir('uploads/category', 0777 , true);
+            }
+            $image->move('uploads/category',$imagename);
+        }else {
+            $imagename = $category->image;
+        }
+        $category->name = $request->name;
+        $category->slug = $slug;
+        $category->image = $imagename;
+        $category->save();
+        return redirect()->route('category.index')->with('successMsg','Category successfully updated');
     }
 
     /**
@@ -80,6 +129,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Category::findOrFail($id)->delete();
+        return redirect()->back()->with('successMsg','Category successfully delete');
     }
 }
