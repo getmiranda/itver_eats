@@ -64,5 +64,31 @@ class PermissionsTableSeeder extends Seeder
             'slug'          => 'roles.destroy',
             'description'   => 'Podría eliminar cualquier rol del sistema',
         ]);
+
+
+        Permission::create([
+            'name'          => 'Navegar en Dashboard',
+            'slug'          => 'admin.dashboard',
+            'description'   => 'Navega en el Dashboar del sistema',
+        ]);
+        Permission::create([
+            'name'          => 'Navegar Roles',
+            'slug'          => 'slider.index',
+            'description'   => 'Lista y navega todos los Sliders',
+        ]);
+
+        Permission::create([
+            'name'          => 'Navega Categorias',
+            'slug'          => 'category.index',
+            'description'   => 'Lista y navega todas la Categorias',
+        ]);
+
+        Permission::create([
+            'name'          => 'Navega Productos',
+            'slug'          => 'product.index',
+            'description'   => 'Lista y navega los productos',
+        ]);
+
+
     }
 }

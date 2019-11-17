@@ -98,7 +98,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $categories = Category::all();
+        return view('admin.product.edit',compact('product','categories'));
     }
 
     /**
@@ -110,7 +112,43 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'category' => 'required',
+            'name' => 'required',
+            'description' => 'required',
+            'details' => 'required',
+            'price' => 'required',
+            'availability' => 'required',
+            'image' => 'mimes:jpeg,jpg,bmp,png',
+
+        ]);
+        $product = Product::findOrFail($id);
+        $image = $request->file('image');
+        $slug = str_slug($request->name);
+        if (isset($image))
+        {
+            $currentDate = Carbon::now()->toDateString();
+            $imagename = $slug.'-'.$currentDate.'-'. uniqid() .'.'. $image->getClientOriginalExtension();
+            if (!file_exists('uploads/product'))
+            {
+                mkdir('uploads/product',0777,true);
+            }
+            unlink('uploads/product/'.$product->image);
+            $image->move('uploads/product',$imagename);
+        }else{
+            $imagename = $product->image;
+        }
+        $product->category_id = $request->category;
+        $product->user_id = Auth::user()->id;
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->details = $request->details;
+        $product->price = $request->price;
+        $product->availability = $request->availability;
+        $product->check = false;
+        $product->image = $imagename;
+        $product->save();
+        return redirect()->route('product.index')->with('successMsg','Item successfully updated');
     }
 
     /**
@@ -121,7 +159,13 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        if (file_exists('uploads/product/'.$product->image))
+        {
+            unlink('uploads/product/'.$product->image);
+        }
+        $product->delete();
+        return redirect()->back()->with('successMsg','Item successfully deleted');
     }
 
     public function check($id){

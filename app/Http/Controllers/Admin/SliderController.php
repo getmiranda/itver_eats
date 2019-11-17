@@ -9,6 +9,10 @@ use App\Slider;
 
 class SliderController extends Controller
 {
+    public function __construct()
+    {
+        // $this->middleware('can:slider.index')->only(['index']);
+    }
     /**
      * Display a listing of the resource.
      *
