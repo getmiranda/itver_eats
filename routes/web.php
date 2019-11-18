@@ -13,7 +13,7 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('welcome');
-
+Route::post('product','ProductController@store')->name('product.send');
 // Route::middleware(['auth'])->group(function () {
 
 // 	Route::resource('admin.seller.product','ProductController');

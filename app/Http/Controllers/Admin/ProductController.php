@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Brian2694\Toastr\Facades\Toastr;
 use App\Product;
 use App\Category;
 
@@ -48,6 +49,8 @@ class ProductController extends Controller
             'details' => 'required',
             'price' => 'required',
             'availability' => 'required',
+            'name_vendedor' => 'required',
+            'phone' => 'required',
             'image' => 'required|mimes:jpeg,jpg,bmp,png',
         ]);
         $image = $request->file('image');
@@ -72,11 +75,14 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->details = $request->details;
         $product->price = $request->price;
+        $product->vendedor = $request->name_vendedor;
+        $product->phone = $request->phone;
         $product->availability = $request->availability;
-        $product->check = false;
+        $product->check = true;
         $product->image = $imagename;
         $product->save();
-        return redirect()->route('product.index')->with('successMsg','Item successfully saved');
+        Toastr::success('El producto ha sido guardado correctamente.', 'Éxito');
+        return redirect()->route('product.index');
     }
 
     /**
@@ -145,10 +151,11 @@ class ProductController extends Controller
         $product->details = $request->details;
         $product->price = $request->price;
         $product->availability = $request->availability;
-        $product->check = false;
+        $product->check = true;
         $product->image = $imagename;
         $product->save();
-        return redirect()->route('product.index')->with('successMsg','Item successfully updated');
+        Toastr::success('El producto ha sido actualizado correctamente.', 'Éxito');
+        return redirect()->route('product.index');
     }
 
     /**
@@ -160,19 +167,20 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::findOrFail($id);
-        if (file_exists('uploads/product/'.$product->image))
-        {
+        if (file_exists('uploads/product/'.$product->image))        {
             unlink('uploads/product/'.$product->image);
         }
+
         $product->delete();
-        return redirect()->back()->with('successMsg','Item successfully deleted');
+        Toastr::success('El producto ha sido eliminado correctamente.', 'Éxito');
+        return redirect()->back();
     }
 
     public function check($id){
         $product = Product::findOrFail($id);
         $product->check = true;
         $product->save();
-        // Toastr::success('Product successfully confirmed.','Success',["positionClass" => "toast-top-right"]);
+        Toastr::success('El producto ha sido confirmado correctamente.', 'Éxito');
         // Notification::route('mail',$product->email )->notify(new ProductConfirmed());
         return redirect()->back();
     }

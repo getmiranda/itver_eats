@@ -1,17 +1,9 @@
-@if ($errors->any())
+{{-- @if ($errors->any())
     @foreach ($errors->all() as $error)
-        <div class="alert alert-danger">
-            <button type="button" aria-hidden="true" class="close" onclick="this.parentElement.style.display='none'">×</button>
-            <span>
-                                    <b> Danger - </b> {{ $error }}</span>
-        </div>
+        {{ Toastr::error($error, 'Error', ["positionClass" => "toast-bottom-right"]) }}
     @endforeach
 @endif
 
 @if(session('successMsg'))
-    <div class="alert alert-success">
-        <button type="button" aria-hidden="true" class="close" onclick="this.parentElement.style.display='none'">×</button>
-        <span>
-                                    <b> Success - </b> {{ session('successMsg') }}</span>
-    </div>
-@endif
+    {{ Toastr::success(session('successMsg'), 'Éxito', ["positionClass" => "toast-bottom-right"]) }}
+@endif --}}

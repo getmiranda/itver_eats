@@ -78,26 +78,28 @@
                 <!-- /banner -->
 
                 @foreach ($category->products as $product)
-                    <!-- Product Single -->
-                    <div class="col-md-3 col-sm-6 col-xs-6">
-                        <div class="product product-single">
-                            <div class="product-thumb">
-                                <button class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</button>
-                                <img src="{{ asset('uploads/product/'.$product->image) }}" alt="">
-                            </div>
-                            <div class="product-body">
-                                <h3 class="product-price">${{ $product->price }}</h3>
+                    @if ($product->check == true && $product->availability == true)
+                        <!-- Product Single -->
+                        <div class="col-md-3 col-sm-6 col-xs-6">
+                            <div class="product product-single">
+                                <div class="product-thumb">
+                                    <button class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</button>
+                                    <img src="{{ asset('uploads/product/'.$product->image) }}" alt="">
+                                </div>
+                                <div class="product-body">
+                                    <h3 class="product-price">${{ $product->price }}</h3>
 
-                                <h2 class="product-name"><a href="#">{{ $product->name }}</a></h2>
-                                <div class="product-btns">
-                                    <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
-                                    <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
-                                    <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                                    <h2 class="product-name"><a href="#">{{ $product->name }}</a></h2>
+                                    <div class="product-btns">
+                                        <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
+                                        <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
+                                        <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- /Product Single -->
+                        <!-- /Product Single -->
+                    @endif
                 @endforeach
 
             </div>
@@ -110,108 +112,86 @@
 <!-- /section -->
 
 <!-- section -->
-<div class="section">
+<div id="publica" class="section section-grey">
     <!-- container -->
     <div class="container">
         <!-- row -->
         <div class="row">
-            <form id="checkout-form" class="clearfix">
+            <!-- section title -->
+            <div class="col-md-12">
+                <div class="section-title">
+                    <h2 class="title">Publica</h2>
+                </div>
+            </div>
+            <!-- section title -->
+            <form id="checkout-form" class="clearfix" method="POST" action="{{ route('product.send') }}" enctype="multipart/form-data">
+                @csrf
                 <div class="col-md-6">
                     <div class="billing-details">
 
                         <div class="section-title">
-                            <h3 class="title">Danos los detalles de tu producto o servicio</h3>
+                            <h3 class="title">Envianos tu producto o servicio</h3>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label">Category</label>
+                            <select class="form-control" name="category">
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <input class="input" type="text" name="name" placeholder="Nombre del producto">
                         </div>
                         <div class="form-group">
-                            <input class="input" type="text" name="first-name" placeholder="First Name">
+                            <input class="input" type="text" name="description" placeholder="Descripción">
                         </div>
                         <div class="form-group">
-                            <input class="input" type="text" name="last-name" placeholder="Last Name">
+                            <input class="input" type="text" name="details" placeholder="Detalles">
                         </div>
                         <div class="form-group">
-                            <input class="input" type="email" name="email" placeholder="Email">
+                            <input class="input" type="text" name="price" placeholder="Precio">
                         </div>
                         <div class="form-group">
-                            <input class="input" type="text" name="address" placeholder="Address">
+                            <input class="input" type="text" name="name_vendedor" placeholder="Nombre del vendedor">
                         </div>
                         <div class="form-group">
-                            <input class="input" type="text" name="city" placeholder="City">
+                            <input class="input" type="text" name="phone" placeholder="Teléfono">
                         </div>
                         <div class="form-group">
-                            <input class="input" type="text" name="country" placeholder="Country">
+                            <label class="control-label">Imagen</label>
+                            <input type="file" name="image">
                         </div>
-                        <div class="form-group">
-                            <input class="input" type="text" name="zip-code" placeholder="ZIP Code">
-                        </div>
-                        <div class="form-group">
-                            <input class="input" type="tel" name="tel" placeholder="Telephone">
-                        </div>
+
                         <div class="form-group">
                             <div class="input-checkbox">
                                 <input type="checkbox" id="register">
-                                <label class="font-weak" for="register">Danos los detalles de tu producto</label>
+                                <label class="font-weak" for="register">¿Tu categoria no está en la lista?</label>
                                 <div class="caption">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.
+                                    <p>Evaluaremos la categoria propuesta. <br> Selecciona en el formulario cualquiera de las existenetes.
                                         <p>
-                                            <input class="input" type="password" name="password" placeholder="Enter Your Password">
+                                            <input class="input" type="text" name="category_optional" placeholder="Otra categoria">
                                 </div>
                             </div>
+                        </div>
+                        <div class="pull-right">
+                            <button type="submit" class="primary-btn">Enviar</button>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-6">
+
                     <div class="shiping-methods">
                         <div class="section-title">
                             <h4 class="title">¿Quieres publicar tu producto?</h4>
                         </div>
-                        <div class="input-checkbox">
-                            <input type="radio" name="shipping" id="shipping-1" checked>
-                            <label for="shipping-1">Free Shiping -  $0.00</label>
-                            <div class="caption">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    <p>
-                            </div>
-                        </div>
-                        <div class="input-checkbox">
-                            <input type="radio" name="shipping" id="shipping-2">
-                            <label for="shipping-2">Standard - $4.00</label>
-                            <div class="caption">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    <p>
-                            </div>
-                        </div>
+                        <p>sdfsdfsdfsdfsfsfsdf</p>
                     </div>
 
-                    <div class="payments-methods">
-                        <div class="section-title">
-                            <h4 class="title">Payments Methods</h4>
-                        </div>
-                        <div class="input-checkbox">
-                            <input type="radio" name="payments" id="payments-1" checked>
-                            <label for="payments-1">Direct Bank Transfer</label>
-                            <div class="caption">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    <p>
-                            </div>
-                        </div>
-                        <div class="input-checkbox">
-                            <input type="radio" name="payments" id="payments-2">
-                            <label for="payments-2">Cheque Payment</label>
-                            <div class="caption">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    <p>
-                            </div>
-                        </div>
-                        <div class="input-checkbox">
-                            <input type="radio" name="payments" id="payments-3">
-                            <label for="payments-3">Paypal System</label>
-                            <div class="caption">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    <p>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
 
 
@@ -224,7 +204,7 @@
 <!-- /section -->
 
 <!-- About Us -->
-<div class="section section-grey">
+<div id="about_us" class="section">
     <!-- container -->
     <div class="container">
         <!-- row -->
@@ -236,7 +216,26 @@
                 </div>
             </div>
             <!-- /section-title -->
-            <p>Hola mundo</p>
+            <div class="col-md-4">
+                <div class="section-title">
+                    <h4 class="title">Misión</h4>
+                </div>
+                <p>Fomentar el la compra y venta por medio de redes que beneficien a proveedores de productos y servicios.</p>
+            </div>
+
+            <div class="col-md-4">
+                    <div class="section-title">
+                            <h4 class="title">FECHA DE FUNDACIÓN</h4>
+                        </div>
+                        <p>10 de Enero del 2019</p>
+            </div>
+            <div class="col-md-4">
+                <div class="section-title">
+                    <h4 class="title">Información General</h4>
+                </div>
+                <p>Con Itver Eats es la manera más fácil de recibir la comida o producto de tu preferencia estés donde estés.</p>
+            </div>
+
         </div>
         <!-- /row -->
     </div>
@@ -247,5 +246,12 @@
 @endsection
 
 @push('scripts')
+@if ($errors->any())
+    @foreach ($errors->all() as $error)
+    <script>
+        toastr.error('{{ $error }}');
+    </script>
+    @endforeach
+@endif
 
 @endpush

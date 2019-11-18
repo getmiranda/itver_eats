@@ -91,11 +91,12 @@
                                         <th>Name</th>
                                         <th>Image</th>
                                         <th>Category Name</th>
-                                        <th>User Name</th>
+                                        {{-- <th>User Name</th> --}}
                                         <th>Description</th>
                                         <th>Details</th>
                                         <th>Price</th>
                                         <th>Status</th>
+                                        <th>Otra Categoria</th>
                                         <th>Created At</th>
                                         <th>Action</th>
                                 </thead>
@@ -107,40 +108,41 @@
                                                 <td>{{ $product->name }}</td>
                                                 <td><img class="img-responsive img-thumbnail" src="{{ asset('uploads/product/'.$product->image) }}" style="height: 100px; width: 100px" alt=""></td>
                                                 <td>{{ $product->category->name }}</td>
-                                                <td>{{ $product->user->nickname }}</td>
+                                                {{-- <td>{{ $product->user->nickname }}</td> --}}
                                                 <td>{{ $product->description }}</td>
                                                 <td>{{ $product->details }}</td>
                                                 <td>{{ $product->price }}</td>
-                                                <td>
-                                                    @if($product->check == true)
-                                                        <span class="label label-info">Confirmed</span>
-                                                    @else
-                                                        <span class="label label-danger">not Confirmed yet</span>
-                                                    @endif
+                                                <td align="center">
+                                                    <span class="label label-danger">No Publicado</span>
+                                                    <form id="status-form-{{ $product->id }}" action="{{ route('product.check',$product->id) }}" style="display: none;" method="POST">
+                                                        @csrf
+                                                    </form>
+                                                    <button type="button" class="btn btn-info btn-sm" onclick="if(confirm('Are you verify this request by phone?')){
+                                                            event.preventDefault();
+                                                                document.getElementById('status-form-{{ $product->id }}').submit();
+                                                            }else {
+                                                                event.preventDefault();
+                                                            }"><i class="material-icons">done</i>
+                                                    </button>
                                                 </td>
+                                                <td>{{ $product->other_category }}</td>
                                                 <td>{{ $product->created_at }}</td>
                                                 <td>
-                                                    @if($product->check == false)
-                                                        <form id="status-form-{{ $product->id }}" action="{{ route('product.check',$product->id) }}" style="display: none;" method="POST">
-                                                            @csrf
-                                                        </form>
-                                                        <button type="button" class="btn btn-info btn-sm" onclick="if(confirm('Are you verify this request by phone?')){
-                                                                event.preventDefault();
-                                                                document.getElementById('status-form-{{ $product->id }}').submit();
-                                                                }else {
-                                                                event.preventDefault();
-                                                                }"><i class="material-icons">done</i></button>
-                                                    @endif
                                                     <form id="delete-form-{{ $product->id }}" action="{{ route('product.destroy',$product->id) }}" style="display: none;" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                     </form>
                                                     <button type="button" class="btn btn-danger btn-sm" onclick="if(confirm('Are you sure? You want to delete this?')){
                                                             event.preventDefault();
-                                                            document.getElementById('delete-form-{{ $product->id }}').submit();
+                                                                document.getElementById('delete-form-{{ $product->id }}').submit();
                                                             }else {
-                                                            event.preventDefault();
-                                                            }"><i class="material-icons">delete</i></button>
+                                                                event.preventDefault();
+                                                            }"><i class="material-icons">delete</i>
+                                                    </button>
+
+                                                    <a href="{{ route('product.edit', $product->id) }}" class="btn btn-info btn-sm">
+                                                        <i class="material-icons">mode_edit</i>
+                                                    </a>
                                                 </td>
                                             </tr>
                                         @endif
@@ -163,4 +165,5 @@
             $('#table').DataTable();
         } );
     </script>
+
 @endpush

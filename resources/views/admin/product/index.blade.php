@@ -25,7 +25,7 @@
                                     <th>Name</th>
                                     <th>Image</th>
                                     <th>Category Name</th>
-                                    <th>User Name</th>
+                                    {{-- <th>User Name</th> --}}
                                     <th>Description</th>
                                     <th>Details</th>
                                     <th>Price</th>
@@ -42,7 +42,7 @@
                                             <td>{{ $product->name }}</td>
                                             <td><img class="img-responsive img-thumbnail" src="{{ asset('uploads/product/'.$product->image) }}" style="height: 100px; width: 100px" alt=""></td>
                                             <td>{{ $product->category->name }}</td>
-                                            <td>{{ $product->user->nickname }}</td>
+                                            {{-- <td>{{ $product->user->nickname }}</td> --}}
                                             <td>{{ $product->description }}</td>
                                             <td>{{ $product->details }}</td>
                                             <td>{{ $product->price }}</td>

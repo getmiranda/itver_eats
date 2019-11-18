@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Brian2694\Toastr\Facades\Toastr;
 use App\Category;
 
 class CategoryController extends Controller
@@ -60,7 +61,8 @@ class CategoryController extends Controller
         $category->slug = str_slug($request->name);
         $category->image = $imagename;
         $category->save();
-        return redirect()->route('category.index')->with('successMsg','Category successfully saved.');
+        Toastr::success('La categoria ha sido guardada correctamente.', 'Éxito');
+        return redirect()->route('category.index');
     }
 
     /**
@@ -118,7 +120,8 @@ class CategoryController extends Controller
         $category->slug = $slug;
         $category->image = $imagename;
         $category->save();
-        return redirect()->route('category.index')->with('successMsg','Category successfully updated');
+        Toastr::success('La categoria ha sido actualizada correctamente.', 'Éxito');
+        return redirect()->route('category.index');
     }
 
     /**
@@ -129,7 +132,13 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        Category::findOrFail($id)->delete();
-        return redirect()->back()->with('successMsg','Category successfully delete');
+        $category = Category::findOrFail($id);
+        $category->delete();
+        if (file_exists('uploads/slider/'.$category->image)){
+            unlink('uploads/category/'.$category->image);
+        }
+
+        Toastr::success('La categoria ha sido eliminada correctamente.', 'Éxito');
+        return redirect()->back();
     }
 }

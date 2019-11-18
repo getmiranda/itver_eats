@@ -81,7 +81,21 @@
         });
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    {!! Toastr::message() !!}
+
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+        <script>
+            toastr.error('{{ $error }}', 'Error', {positionClass: "toast-bottom-right", closeButton: true, timeOut: 3000});
+        </script>
+        @endforeach
+    @endif
+
+    {{-- @if(session('successMsg'))
+        <script>
+            toastr.success('{{ session('successMsg') }}', 'Éxito', {positionClass: "toast-bottom-right", closeButton: true, timeOut: 3000})
+        </script>
+    @endif --}}
     @stack('scripts')
+    {!! Toastr::message() !!}
 </body>
 </html>

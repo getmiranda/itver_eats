@@ -15,7 +15,7 @@
                     @include('layouts.partial.msg')
                     <div class="card">
                         <div class="card-header" data-background-color="purple">
-                            <h4 class="title">Add New Item</h4>
+                            <h4 class="title">Nuevo Producto</h4>
                         </div>
                         <div class="card-content">
                             <form method="POST" action="{{ route('product.store') }}" enctype="multipart/form-data">
@@ -35,8 +35,8 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group label-floating">
-                                            <label class="control-label">Nombre</label>
-                                            <input type="text" class="form-control" name="name">
+                                            <label class="control-label">Nombre de producto o servicio</label>
+                                            <input type="text" class="form-control" name="name" value="{{ old('name') }}">
                                         </div>
                                     </div>
                                 </div>
@@ -44,7 +44,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Description</label>
-                                            <textarea class="form-control" name="description"></textarea>
+                                            <input class="form-control" name="description" value="{{ old('description') }}">
                                         </div>
                                     </div>
                                 </div>
@@ -52,7 +52,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Detalles</label>
-                                            <textarea class="form-control" name="details"></textarea>
+                                            <input class="form-control" name="details" value="{{ old('details') }}">
                                         </div>
                                     </div>
                                 </div>
@@ -60,7 +60,23 @@
                                     <div class="col-md-12">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Price</label>
-                                            <input type="number" class="form-control" name="price">
+                                            <input type="number" class="form-control" name="price" value="{{ old('price') }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Nombre del Vendedor</label>
+                                            <input type="text" class="form-control" name="name_vendedor" value="{{ old('name_vendedor') }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Telefono del Vendedor</label>
+                                            <input type="number" class="form-control" name="phone" value="{{ old('phone') }}">
                                         </div>
                                     </div>
                                 </div>

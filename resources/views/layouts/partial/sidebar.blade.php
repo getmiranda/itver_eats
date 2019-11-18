@@ -20,12 +20,12 @@
                 </li>
             {{-- @endcan --}}
 
-            <li class="{{ Request::is('admin/perfil*') ? 'active': '' }}">
+            {{-- <li class="{{ Request::is('admin/perfil*') ? 'active': '' }}">
                 <a href="{{ route('category.index') }}">
                     <i class="material-icons">content_paste</i>
                     <p>Perfil</p>
                 </a>
-            </li>
+            </li> --}}
             {{-- @can('slider.index') --}}
                 <li class="{{ Request::is('admin/slider*') ? 'active': '' }}">
                     <a href="{{ route('slider.index') }}">
@@ -63,21 +63,21 @@
             @endcan --}}
 
             {{-- @can('users.index') --}}
-            <li class="{{ Request::is('admin/usuario*') ? 'active': '' }}">
+            {{-- <li class="{{ Request::is('admin/usuario*') ? 'active': '' }}">
                 <a href="{{ route('users.index') }}">
                     <i class="material-icons">chrome_reader_mode</i>
                     <p>Usuarios</p>
                 </a>
-            </li>
+            </li> --}}
             {{-- @endcan --}}
 
             {{-- @can('roles.index') --}}
-                <li class="{{ Request::is('admin/rol*') ? 'active': '' }}">
+                {{-- <li class="{{ Request::is('admin/rol*') ? 'active': '' }}">
                     <a href="{{ route('roles.index') }}">
                         <i class="material-icons">chrome_reader_mode</i>
                         <p>Roles</p>
                     </a>
-                </li>
+                </li> --}}
             {{-- @endcan --}}
 
             {{-- <li class="{{ Request::is('admin/contact*') ? 'active': '' }}">
