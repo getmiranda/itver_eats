@@ -40,14 +40,30 @@
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $product->name }}</td>
-                                            <td><img class="img-responsive img-thumbnail" src="{{ asset('uploads/product/'.$product->image) }}" style="height: 100px; width: 100px" alt=""></td>
+                                            <td>
+                                                <a href="{{ route('product.show', $product->id) }}">
+                                                    <img class="img-responsive img-thumbnail" src="{{ asset('uploads/product/'.$product->image) }}" style="height: 100px; width: 100px" alt="">
+                                                </a>
+                                            </td>
                                             <td>{{ $product->category->name }}</td>
                                             {{-- <td>{{ $product->user->nickname }}</td> --}}
                                             <td>{{ $product->description }}</td>
                                             <td>{{ $product->details }}</td>
                                             <td>{{ $product->price }}</td>
-                                            <td>{{ $product->availability }}</td>
-                                            <td>{{ $product->check }}</td>
+                                            <td>
+                                                @if ($product->availability == 1)
+                                                    <span class="label label-success">Disponible</span>
+                                                @else
+                                                <span class="label label-danger">No disponible</span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($product->check == 1)
+                                                    <span class="label label-success">Verificado</span>
+                                                @else
+                                                <span class="label label-danger">No verificado</span>
+                                                @endif
+                                            </td>
                                             <td>{{ $product->created_at }}</td>
                                             <td>{{ $product->updated_at }}</td>
                                             <td>

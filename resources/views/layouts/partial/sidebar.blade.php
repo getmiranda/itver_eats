@@ -80,12 +80,12 @@
                 </li> --}}
             {{-- @endcan --}}
 
-            {{-- <li class="{{ Request::is('admin/contact*') ? 'active': '' }}">
+            <li class="{{ Request::is('admin/contact*') ? 'active': '' }}">
                 <a href="{{ route('contact.index') }}">
                     <i class="material-icons">message</i>
                     <p>Mensaje de contacto</p>
                 </a>
-            </li> --}}
+            </li>
 
             {{-- Elemento original --}}
             {{-- <li class="active">

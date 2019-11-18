@@ -29,6 +29,7 @@ class CreateProductsTable extends Migration
             //Seccion para la v1
             $table->string('vendedor', 50);
             $table->string('phone', 10);
+            $table->string('email',70);
 
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

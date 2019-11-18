@@ -90,14 +90,17 @@
                                         <th>ID</th>
                                         <th>Name</th>
                                         <th>Image</th>
-                                        <th>Category Name</th>
+                                        {{-- <th>Category Name</th> --}}
                                         {{-- <th>User Name</th> --}}
                                         <th>Description</th>
-                                        <th>Details</th>
+                                        {{-- <th>Details</th> --}}
                                         <th>Price</th>
+                                        <th>Vendedor</th>
+                                        {{-- <th>Teléfono</th>
+                                        <th>Email</th> --}}
                                         <th>Status</th>
                                         <th>Otra Categoria</th>
-                                        <th>Created At</th>
+                                        {{-- <th>Created At</th> --}}
                                         <th>Action</th>
                                 </thead>
                                 <tbody>
@@ -107,27 +110,45 @@
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>{{ $product->name }}</td>
                                                 <td><img class="img-responsive img-thumbnail" src="{{ asset('uploads/product/'.$product->image) }}" style="height: 100px; width: 100px" alt=""></td>
-                                                <td>{{ $product->category->name }}</td>
+                                                {{-- <td>{{ $product->category->name }}</td> --}}
                                                 {{-- <td>{{ $product->user->nickname }}</td> --}}
                                                 <td>{{ $product->description }}</td>
-                                                <td>{{ $product->details }}</td>
+                                                {{-- <td>{{ $product->details }}</td> --}}
                                                 <td>{{ $product->price }}</td>
-                                                <td align="center">
+                                                <td>{{ $product->vendedor }}</td>
+                                                {{-- <td>{{ $product->phone }}</td>
+                                                <td>{{ $product->email }}</td> --}}
+                                                <td>
                                                     <span class="label label-danger">No Publicado</span>
+                                                </td>
+                                                <td>
+                                                    @if ($product->other_category == null)
+                                                        <span class="label label-danger">No change</span>
+                                                    @else
+                                                        {{ $product->other_category }}
+                                                    @endif
+                                                </td>
+                                                {{-- <td>{{ $product->created_at }}</td> --}}
+                                                <td>
+                                                    {{-- Boton de check --}}
                                                     <form id="status-form-{{ $product->id }}" action="{{ route('product.check',$product->id) }}" style="display: none;" method="POST">
                                                         @csrf
                                                     </form>
-                                                    <button type="button" class="btn btn-info btn-sm" onclick="if(confirm('Are you verify this request by phone?')){
+                                                    <button type="button" class="btn btn-success btn-sm" onclick="if(confirm('Are you verify this request by phone?')){
                                                             event.preventDefault();
                                                                 document.getElementById('status-form-{{ $product->id }}').submit();
                                                             }else {
                                                                 event.preventDefault();
                                                             }"><i class="material-icons">done</i>
                                                     </button>
-                                                </td>
-                                                <td>{{ $product->other_category }}</td>
-                                                <td>{{ $product->created_at }}</td>
-                                                <td>
+
+                                                    <a href="{{ route('product.show', $product->id) }}" class="btn btn-info btn-sm">
+                                                        <i class="material-icons">visibility</i>
+                                                    </a> <br>
+
+                                                    <a href="{{ route('product.edit', $product->id) }}" class="btn btn-warning btn-sm">
+                                                        <i class="material-icons">mode_edit</i>
+                                                    </a>
                                                     <form id="delete-form-{{ $product->id }}" action="{{ route('product.destroy',$product->id) }}" style="display: none;" method="POST">
                                                         @csrf
                                                         @method('DELETE')
@@ -139,10 +160,6 @@
                                                                 event.preventDefault();
                                                             }"><i class="material-icons">delete</i>
                                                     </button>
-
-                                                    <a href="{{ route('product.edit', $product->id) }}" class="btn btn-info btn-sm">
-                                                        <i class="material-icons">mode_edit</i>
-                                                    </a>
                                                 </td>
                                             </tr>
                                         @endif

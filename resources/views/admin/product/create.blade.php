@@ -67,22 +67,6 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group label-floating">
-                                            <label class="control-label">Nombre del Vendedor</label>
-                                            <input type="text" class="form-control" name="name_vendedor" value="{{ old('name_vendedor') }}">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Telefono del Vendedor</label>
-                                            <input type="number" class="form-control" name="phone" value="{{ old('phone') }}">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group label-floating">
                                             <label class="control-label">Publicar</label>
                                             <select class="form-control" name="availability">
                                                 <option value="1">Si</option>

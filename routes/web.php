@@ -14,12 +14,7 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('welcome');
 Route::post('product','ProductController@store')->name('product.send');
-// Route::middleware(['auth'])->group(function () {
-
-// 	Route::resource('admin.seller.product','ProductController');
-
-
-// });
+Route::post('contact','ContactController@store')->name('contact.send');
 
 Route::group(['prefix'=>'admin','middleware'=>'auth','namespace'=>'admin'], function (){
     Route::get('dashboard', 'DashboardController@index')->name('admin.dashboard');
@@ -28,7 +23,7 @@ Route::group(['prefix'=>'admin','middleware'=>'auth','namespace'=>'admin'], func
     Route::resource('product','ProductController');
     Route::resource('users','UserController');
     Route::resource('roles','RoleController');
-
+    Route::resource('contact','ContactController');
 
     Route::post('product/{id}','ProductController@check')->name('product.check');
 
@@ -39,7 +34,5 @@ Route::group(['prefix'=>'admin','middleware'=>'auth','namespace'=>'admin'], func
     // Route::get('contact/{id}','ContactController@show')->name('contact.show');
     // Route::delete('contact/{id}','ContactController@destroy')->name('contact.destroy');
 
-    // Route::get('roles', 'RoleController@index')->name('roles.index')
-	// 	->middleware('can:roles.index');
 });
 

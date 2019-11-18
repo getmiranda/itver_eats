@@ -49,8 +49,6 @@ class ProductController extends Controller
             'details' => 'required',
             'price' => 'required',
             'availability' => 'required',
-            'name_vendedor' => 'required',
-            'phone' => 'required',
             'image' => 'required|mimes:jpeg,jpg,bmp,png',
         ]);
         $image = $request->file('image');
@@ -75,8 +73,9 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->details = $request->details;
         $product->price = $request->price;
-        $product->vendedor = $request->name_vendedor;
-        $product->phone = $request->phone;
+        $product->vendedor = 'admin';
+        $product->phone = 1234567890;
+        $product->email = 'admin@admin.com';
         $product->availability = $request->availability;
         $product->check = true;
         $product->image = $imagename;
@@ -93,7 +92,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        return view('admin.product.show',compact('product'));
     }
 
     /**
@@ -145,13 +145,13 @@ class ProductController extends Controller
             $imagename = $product->image;
         }
         $product->category_id = $request->category;
-        $product->user_id = Auth::user()->id;
+        // $product->user_id = Auth::user()->id;
         $product->name = $request->name;
         $product->description = $request->description;
         $product->details = $request->details;
         $product->price = $request->price;
         $product->availability = $request->availability;
-        $product->check = true;
+        // $product->check = true;
         $product->image = $imagename;
         $product->save();
         Toastr::success('El producto ha sido actualizado correctamente.', 'Éxito');

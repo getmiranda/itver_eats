@@ -83,7 +83,7 @@
                         <div class="col-md-3 col-sm-6 col-xs-6">
                             <div class="product product-single">
                                 <div class="product-thumb">
-                                    <button class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</button>
+                                    <button class="main-btn quick-view"><i class="fa fa-plus"></i> Detalles</button>
                                     <img src="{{ asset('uploads/product/'.$product->image) }}" alt="">
                                 </div>
                                 <div class="product-body">
@@ -91,9 +91,10 @@
 
                                     <h2 class="product-name"><a href="#">{{ $product->name }}</a></h2>
                                     <div class="product-btns">
-                                        <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
+
+                                        {{-- <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
                                         <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
-                                        <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                                        <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button> --}}
                                     </div>
                                 </div>
                             </div>
@@ -129,18 +130,9 @@
                 <div class="col-md-6">
                     <div class="billing-details">
 
-                        <div class="section-title">
-                            <h3 class="title">Envianos tu producto o servicio</h3>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label">Category</label>
-                            <select class="form-control" name="category">
-                                @foreach($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                            <div class="section-title">
+                                    <h4 class="title">Envíanos tu producto o servicio</h4>
+                                </div>
 
                         <div class="form-group">
                             <input class="input" type="text" name="name" placeholder="Nombre del producto">
@@ -155,10 +147,12 @@
                             <input class="input" type="text" name="price" placeholder="Precio">
                         </div>
                         <div class="form-group">
-                            <input class="input" type="text" name="name_vendedor" placeholder="Nombre del vendedor">
-                        </div>
-                        <div class="form-group">
-                            <input class="input" type="text" name="phone" placeholder="Teléfono">
+                            <label class="control-label">Category</label>
+                            <select class="form-control" name="category">
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
                             <label class="control-label">Imagen</label>
@@ -176,25 +170,39 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="pull-right">
-                            <button type="submit" class="primary-btn">Enviar</button>
-                        </div>
                     </div>
                 </div>
 
                 <div class="col-md-6">
+                    <div class="shiping-methods">
+                        <div class="section-title">
+                            <h4 class="title">Necesitamos ponernos en contacto contigo</h4>
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="text" name="name_vendedor" placeholder="Nombre">
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="text" name="phone" placeholder="Teléfono">
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="text" name="email" placeholder="Correo electrónico">
+                        </div>
+                    </div>
 
                     <div class="shiping-methods">
                         <div class="section-title">
-                            <h4 class="title">¿Quieres publicar tu producto?</h4>
+                            <h4 class="title">Importante</h4>
                         </div>
-                        <p>sdfsdfsdfsdfsfsfsdf</p>
+                        <p>
+                            Nuestro equipo de Itver eats revisará si cumple con los con las normas de publicación.
+                            Se te enviará una notificación cuando tu producto o servicio se apruebe. En caso contrario deberás
+                            solicitar una nueva publicacion de tu producto o servicio.
+                        </p>
                     </div>
-
-
+                    <div class="pull-right">
+                        <button type="submit" class="primary-btn">Enviar</button>
+                    </div>
                 </div>
-
-
             </form>
         </div>
         <!-- /row -->
@@ -249,7 +257,7 @@
 @if ($errors->any())
     @foreach ($errors->all() as $error)
     <script>
-        toastr.error('{{ $error }}');
+        toastr.error('{{ $error }}', 'Error');
     </script>
     @endforeach
 @endif

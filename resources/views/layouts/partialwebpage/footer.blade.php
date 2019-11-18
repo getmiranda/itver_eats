@@ -14,15 +14,15 @@
                     </div>
                     <!-- /footer logo -->
 
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</p>
+                    <p>¡Siguenos en nuestras redes sociales!</p>
 
                     <!-- footer social -->
                     <ul class="footer-social">
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="https://www.facebook.com/itvereats/"><i class="fa fa-facebook"></i></a></li>
                         <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                         <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                        <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                        <li><a href="#"><i class="fa fa-inbox"></i></a></li>
+                        <li><a href="#"><i class="fa fa-whatsapp">  </i></a></li>
                     </ul>
                     <!-- /footer social -->
                 </div>
@@ -32,13 +32,10 @@
             <!-- footer widget -->
             <div class="col-md-3 col-sm-6 col-xs-6">
                 <div class="footer">
-                    <h3 class="footer-header">My Account</h3>
+                    <h3 class="footer-header">Te puede interesar</h3>
                     <ul class="list-links">
-                        <li><a href="#">My Account</a></li>
-                        <li><a href="#">My Wishlist</a></li>
-                        <li><a href="#">Compare</a></li>
-                        <li><a href="#">Checkout</a></li>
-                        <li><a href="#">Login</a></li>
+                        <li><a href="http://www.itver.edu.mx/">ITVer</a></li>
+                        <li><a href="http://sii.itver.edu.mx/">SII</a></li>
                     </ul>
                 </div>
             </div>
@@ -46,8 +43,8 @@
 
             <div class="clearfix visible-sm visible-xs"></div>
 
-            <!-- footer widget -->
-            <div class="col-md-3 col-sm-6 col-xs-6">
+            {{-- <!-- footer widget -->
+            <div class="col-md-4 col-sm-6 col-xs-6">
                 <div class="footer">
                     <h3 class="footer-header">Customer Service</h3>
                     <ul class="list-links">
@@ -58,18 +55,27 @@
                     </ul>
                 </div>
             </div>
-            <!-- /footer widget -->
+            <!-- /footer widget --> --}}
 
             <!-- footer subscribe -->
-            <div class="col-md-3 col-sm-6 col-xs-6">
+            <div class="col-md-6 col-sm-6 col-xs-6">
                 <div class="footer">
-                    <h3 class="footer-header">Stay Connected</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
-                    <form>
+                    <h3 class="footer-header">Comparte con nosotros</h3>
+                    <p>De esta manera nos ayudas a seguir mejorando y dar un mejor servicio.</p>
+                    <form method="POST" action="{{ route('contact.send') }}">
+                        @csrf
                         <div class="form-group">
-                            <input class="input" placeholder="Enter Email Address">
+                            <input name="email" class="input" type="email" placeholder="Tu email">
                         </div>
-                        <button class="primary-btn">Join Newslatter</button>
+                        <div class="form-group">
+                            <input name="subject" class="input" type="text" placeholder="Subject">
+                        </div>
+                        <div class="form-group">
+                            <textarea name="comments" class="input form-control" placeholder="Comentario..." rows="6"></textarea>
+                        </div>
+                        <div class="pull-right">
+                            <button type="submit" class="primary-btn" >Envia tus comentarios</button>
+                        </div>
                     </form>
                 </div>
             </div>

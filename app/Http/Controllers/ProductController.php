@@ -47,6 +47,7 @@ class ProductController extends Controller
             'price' => 'required|numeric',
             'name_vendedor' => 'required',
             'phone' => 'required',
+            'email' => 'required',
             'image' => 'required|mimes:jpeg,jpg,bmp,png',
         ]);
         $image = $request->file('image');
@@ -75,6 +76,7 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->vendedor = $request->name_vendedor;
         $product->phone = $request->phone;
+        $product->email = $request->email;
         $product->other_category = $request->category_optional;
         $product->availability = true;
         $product->check = false;

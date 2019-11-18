@@ -90,11 +90,6 @@
         @endforeach
     @endif
 
-    {{-- @if(session('successMsg'))
-        <script>
-            toastr.success('{{ session('successMsg') }}', 'Éxito', {positionClass: "toast-bottom-right", closeButton: true, timeOut: 3000})
-        </script>
-    @endif --}}
     @stack('scripts')
     {!! Toastr::message() !!}
 </body>
