@@ -5,7 +5,8 @@
         Tip 2: you can also add an image using data-image tag
     -->
     <div class="logo">
-        <a href="{{ route('admin.dashboard') }}" class="simple-text">
+        <a href="{{ route('welcome') }}" class="simple-text">
+            <i class="material-icons">arrow_back</i>
             ITVer Eats
         </a>
     </div>

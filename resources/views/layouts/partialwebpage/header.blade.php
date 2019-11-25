@@ -29,16 +29,29 @@
                                     <strong class="text-uppercase">My Account <i class="fa fa-caret-down"></i></strong>
                                 </div>
                                 <ul class="custom-menu">
-                                    <li><a href=""><i class="fa fa-user-o"></i> My Profile</a></li>
+                                    {{-- <li><a href=""><i class="fa fa-user-o"></i> My Profile</a></li> --}}
                                     <li><a href="{{ route('product.index') }}"><i class="fa fa-heart-o"></i> My Products</a></li>
                                     <li><a href="{{ route('admin.dashboard') }}"><i class="fa fa-exchange"></i> Dashboard</a></li>
-                                    <li><a href="{{ route('logout') }}"><i class="fa fa-unlock-alt"></i>Log Out</a></li>
+                                    {{-- <li><a href="{{ route('logout') }}"><i class="fa fa-unlock-alt" ></i>Log Out</a>
+                                    </li> --}}
+                                    <li>
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();"><i class="fa fa-unlock-alt" ></i>Log Out
+                                        </a>
+
+                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                             @csrf
+                                         </form>
+                                    </li>
                                 </ul>
                             @else
                                 <a href="{{ route('login') }}" class="text-uppercase">Login</a>
 
                                 @if (Route::has('register'))
-                                    / <a href="{{ route('register') }}" class="text-uppercase">Register</a>
+                                {{-- @can('admin')
+                                / <a href="{{ route('register') }}" class="text-uppercase">Register</a>
+                                @endcan --}}
                                 @endif
                             @endauth
                         </li>

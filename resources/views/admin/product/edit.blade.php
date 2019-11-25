@@ -52,7 +52,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Detalles</label>
-                                                <textarea class="form-control" name="details">{{ $product->description }}</textarea>
+                                                <textarea class="form-control" name="details">{{ $product->details }}</textarea>
                                             </div>
                                         </div>
                                     </div>

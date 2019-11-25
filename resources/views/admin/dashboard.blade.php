@@ -16,9 +16,9 @@
                             <i class="material-icons">content_copy</i>
                         </div>
                         <div class="card-content">
-                            <p class="category">Category / Item</p>
-                            {{-- <h3 class="title">{{ $categoryCount }}/{{ $itemCount }}
-                            </h3> --}}
+                            <p class="category">Category / Product</p>
+                            <h3 class="title">{{ $categoryCount }}/{{ $productCount }}
+                            </h3>
                         </div>
                         <div class="card-footer">
                             <div class="stats">
@@ -35,7 +35,7 @@
                         </div>
                         <div class="card-content">
                             <p class="category">Slider Count</p>
-                            {{-- <h3 class="title">{{ $sliderCount }}</h3> --}}
+                            <h3 class="title">{{ $sliderCount }}</h3>
                         </div>
                         <div class="card-footer">
                             <div class="stats">
@@ -50,8 +50,8 @@
                             <i class="material-icons">info_outline</i>
                         </div>
                         <div class="card-content">
-                            <p class="category">Reservation</p>
-                            {{-- <h3 class="title">{{ $products->count() }}</h3> --}}
+                            <p class="category">Productos Pendientes</p>
+                            <h3 class="title">{{ $pendingProducts->count() }}</h3>
                         </div>
                         <div class="card-footer">
                             <div class="stats">
@@ -67,7 +67,7 @@
                         </div>
                         <div class="card-content">
                             <p class="category">Contact</p>
-                            {{-- <h3 class="title">{{ $contactCount }}</h3> --}}
+                            <h3 class="title">{{ $contactCount }}</h3>
                         </div>
                         <div class="card-footer">
                             <div class="stats">
@@ -95,11 +95,11 @@
                                         <th>Description</th>
                                         {{-- <th>Details</th> --}}
                                         <th>Price</th>
-                                        <th>Vendedor</th>
+                                        <th>Name of the Vendor</th>
                                         {{-- <th>Teléfono</th>
                                         <th>Email</th> --}}
                                         <th>Status</th>
-                                        <th>Otra Categoria</th>
+                                        <th>Other Category</th>
                                         {{-- <th>Created At</th> --}}
                                         <th>Action</th>
                                 </thead>
@@ -122,7 +122,7 @@
                                                     <span class="label label-danger">No Publicado</span>
                                                 </td>
                                                 <td>
-                                                    @if ($product->other_category == null)
+                                                    @if ($product->other_category == null && $product->category != $product->other_category)
                                                         <span class="label label-danger">No change</span>
                                                     @else
                                                         {{ $product->other_category }}

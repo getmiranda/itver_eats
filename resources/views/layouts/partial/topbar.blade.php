@@ -10,8 +10,9 @@
             <a class="navbar-brand" href="#"> Hello, {{ Auth::user()->nickname }} </a>
         </div>
         <div class="collapse navbar-collapse">
+
             <ul class="nav navbar-nav navbar-right">
-                <li>
+                {{-- <li>
                     <a href="{{ route('welcome') }}" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="material-icons">dashboard</i>
                         <p class="hidden-lg hidden-md">Dashboard</p>
@@ -22,9 +23,11 @@
                         <i class="material-icons">person</i>
                         <p class="hidden-lg hidden-md">Profile</p>
                     </a>
-                </li>
+                </li> --}}
                 <li>
-                    <a href="{{ route('logout') }}" class="dropdown-toggle" data-toggle="dropdown" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                    <a href="{{ route('logout') }}" class="dropdown-toggle" data-toggle="dropdown"
+                        onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
                         <i class="material-icons">exit_to_app</i>
                         <p class="hidden-lg hidden-md">Logout</p>
                     </a>

@@ -13,6 +13,7 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('welcome');
+Route::get('product/{id}/detail', 'ProductController@detail')->name('product.detail');
 Route::post('product','ProductController@store')->name('product.send');
 Route::post('contact','ContactController@store')->name('contact.send');
 

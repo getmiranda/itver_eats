@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Product;
+use App\Slider;
+use App\Category;
+use App\Contact;
 
 class DashboardController extends Controller
 {
@@ -17,7 +20,12 @@ class DashboardController extends Controller
     {
         //Retornar la vista del dasboard
         $products = Product::all();
-        return view('admin.dashboard', compact('products'));
+        $sliderCount = Slider::count();
+        $categoryCount = Category::count();
+        $productCount = Product::count();
+        $pendingProducts = Product::where('check',false)->get();
+        $contactCount = Contact::count();
+        return view('admin.dashboard', compact('products', 'sliderCount', 'categoryCount', 'productCount','pendingProducts','contactCount'));
     }
 
     /**

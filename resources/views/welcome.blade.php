@@ -29,7 +29,6 @@
         <div class="home-wrap">
             <!-- home slick -->
             <div id="home-slick">
-
                     @foreach ($sliders as $key=>$slider)
                     <!-- banner -->
                     <div class="banner banner-1">
@@ -42,7 +41,6 @@
                     </div>
                     <!-- /banner -->
                 @endforeach
-
             </div>
             <!-- /home slick -->
         </div>
@@ -52,7 +50,7 @@
 </div>
 <!-- /HOME -->
 
-<!-- section -->
+<!-- Productos by Categories section -->
 <div class="section">
     <!-- container -->
     <div class="container">
@@ -83,7 +81,10 @@
                         <div class="col-md-3 col-sm-6 col-xs-6">
                             <div class="product product-single">
                                 <div class="product-thumb">
-                                    <button class="main-btn quick-view"><i class="fa fa-plus"></i> Detalles</button>
+                                    <a href="{{ route('product.detail', $product->id) }}">
+                                       <button class="main-btn quick-view"><i class="fa fa-plus"></i> Detalles</button>
+                                    </a>
+
                                     <img src="{{ asset('uploads/product/'.$product->image) }}" alt="">
                                 </div>
                                 <div class="product-body">
@@ -92,9 +93,6 @@
                                     <h2 class="product-name"><a href="#">{{ $product->name }}</a></h2>
                                     <div class="product-btns">
 
-                                        {{-- <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
-                                        <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
-                                        <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button> --}}
                                     </div>
                                 </div>
                             </div>
@@ -102,17 +100,15 @@
                         <!-- /Product Single -->
                     @endif
                 @endforeach
-
             </div>
             <!-- /row -->
         @endforeach
-
     </div>
     <!-- /container -->
 </div>
 <!-- /section -->
 
-<!-- section -->
+<!-- Public section -->
 <div id="publica" class="section section-grey">
     <!-- container -->
     <div class="container">
@@ -150,7 +146,9 @@
                             <label class="control-label">Category</label>
                             <select class="form-control" name="category">
                                 @foreach($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    <option value="{{ $category->id }}">
+                                        {{ $category->name }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
@@ -164,9 +162,11 @@
                                 <input type="checkbox" id="register">
                                 <label class="font-weak" for="register">¿Tu categoria no está en la lista?</label>
                                 <div class="caption">
-                                    <p>Evaluaremos la categoria propuesta. <br> Selecciona en el formulario cualquiera de las existenetes.
-                                        <p>
-                                            <input class="input" type="text" name="category_optional" placeholder="Otra categoria">
+                                    <p>
+                                        Evaluaremos la categoria propuesta. <br>
+                                        Selecciona en el formulario cualquiera de las existenetes.
+                                    </p>
+                                    <input class="input" type="text" name="category_optional" placeholder="Otra categoria">
                                 </div>
                             </div>
                         </div>

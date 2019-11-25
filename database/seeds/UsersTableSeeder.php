@@ -13,24 +13,23 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        // $admin = Role::create([
-        //     'name' => 'Administrador',
-        //     'slug' => 'admin',
-        //     'special' => 'all-access',
-        // ]);
+        //Creamos rol Administrador
+        $admin = Role::create([
+            'name' => 'Administrador',
+            'slug' => 'admin',
+            'special' => 'all-access',
+        ]);
 
-        // User::create([
-        //     'nickname' => 'administrador',
-        //     'email' => 'administrador@admin.com',
-        //     'password' => Hash::make('123123123'),
-        // ]);
+        //Creamos el usuario Administrador
+        User::create([
+            'nickname' => 'administrador',
+            'email' => 'administrador@admin.com',
+            'password' => Hash::make('123123123'),
+        ]);
 
-
-         //User Admin
+         //Asignamos el Rol Administrador al usuario
          $user = User::where('nickname','administrador') -> first();
-
-         $user->assignRoles('Administrador');
-
+         $user->assignRoles('admin');
 
     }
 }
