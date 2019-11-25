@@ -61,7 +61,7 @@
             <div class="col-md-6 col-sm-6 col-xs-6">
                 <div class="footer">
                     <h3 class="footer-header">Comparte con nosotros</h3>
-                    <p>De esta manera nos ayudas a seguir mejorando y dar un mejor servicio.</p>
+                    <p>Si quieres editar alguno de tus productos envia un mensaje al administrador. De esta manera nos ayudas a seguir mejorando y dar un mejor servicio.</p>
                     <form method="POST" action="{{ route('contact.send') }}">
                         @csrf
                         <div class="form-group">

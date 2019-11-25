@@ -134,13 +134,13 @@
                             <input class="input" type="text" name="name" placeholder="Nombre del producto">
                         </div>
                         <div class="form-group">
-                            <input class="input" type="text" name="description" placeholder="Descripción">
+                            <input class="input" type="text" name="description" placeholder="Descripción (cantidad o presentación)">
                         </div>
                         <div class="form-group">
-                            <input class="input" type="text" name="details" placeholder="Detalles">
+                            <input class="input" type="text" name="details" placeholder="Detalles (p.e: promociones)">
                         </div>
                         <div class="form-group">
-                            <input class="input" type="text" name="price" placeholder="Precio">
+                            <input class="input" type="text" name="price" placeholder="Precio unitario (sólo dígitos)">
                         </div>
                         <div class="form-group">
                             <label class="control-label">Category</label>
@@ -179,13 +179,13 @@
                             <h4 class="title">Necesitamos ponernos en contacto contigo</h4>
                         </div>
                         <div class="form-group">
-                            <input class="input" type="text" name="name_vendedor" placeholder="Nombre">
+                            <input class="input" type="text" name="name_vendedor" placeholder="Tu nombre">
                         </div>
                         <div class="form-group">
-                            <input class="input" type="text" name="phone" placeholder="Teléfono">
+                            <input class="input" type="text" name="phone" placeholder="Tu teléfono (sólo digitos)">
                         </div>
                         <div class="form-group">
-                            <input class="input" type="text" name="email" placeholder="Correo electrónico">
+                            <input class="input" type="text" name="email" placeholder="Tu correo electrónico">
                         </div>
                     </div>
 
